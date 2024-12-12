@@ -24,7 +24,7 @@ export const addProduct = async (c: Context) => {
 };
 
 export const getSingleProduct = async (c: Context) => {
-  const id = c.req.param("id");
+  const id = Number(c.req.param("id"));
   try {
     const result = await db
       .select()
@@ -38,7 +38,7 @@ export const getSingleProduct = async (c: Context) => {
 };
 
 export const deleteProduct = async (c: Context) => {
-  const id = c.req.param("id");
+  const id = Number(c.req.param("id"));
   try {
     const result = await db
       .delete(products)
@@ -52,7 +52,7 @@ export const deleteProduct = async (c: Context) => {
 };
 
 export const updatProduct = async (c: Context) => {
-  const id = c.req.param("id");
+  const id = Number(c.req.param("id"));
   const updatedData = await c.req.json();
   try {
     const result = await db

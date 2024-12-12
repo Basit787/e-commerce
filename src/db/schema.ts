@@ -3,6 +3,7 @@ import {
   integer,
   numeric,
   pgTable,
+  serial,
   text,
   timestamp,
   varchar,
@@ -11,14 +12,12 @@ import {
 // tables for better auth
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
-  name: varchar("name", { length: 255 }).notNull(),
-  age: integer("age"),
-  email: varchar("email", { length: 255 }).notNull().unique(),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
   emailVerified: boolean("emailVerified").notNull(),
-  password: varchar("password", { length: 255 }),
-  role: varchar("role", { length: 255 }).default("user"),
-  createdAt: timestamp("createdAt").defaultNow().notNull(),
-  updatedAt: timestamp("updatedAt").defaultNow().notNull(),
+  image: text("image"),
+  createdAt: timestamp("createdAt").notNull(),
+  updatedAt: timestamp("updatedAt").notNull(),
 });
 
 export const session = pgTable("session", {
@@ -61,9 +60,9 @@ export const verification = pgTable("verifications", {
   updatedAt: timestamp("updatedAt"),
 });
 
-/* //products and order tables
+//products and order tables
 export const products = pgTable("products", {
-  product_id: text("product_id").primaryKey(),
+  product_id: serial("product_id").primaryKey(),
   product_name: varchar("product_name", { length: 255 }).notNull(),
   amount: numeric("amount", { precision: 10, scale: 2 }).notNull(),
   quantity: numeric("quantity", { precision: 10, scale: 2 }).notNull(),
@@ -71,8 +70,8 @@ export const products = pgTable("products", {
 });
 
 export const orders = pgTable("orders", {
-  order_id: text("order_id").primaryKey(),
-  user_id: integer("user_id")
+  orders_id: serial("orders_id").primaryKey(),
+  user_id: text("user_id")
     .references(() => user.id, {
       onDelete: "cascade",
     })
@@ -82,13 +81,13 @@ export const orders = pgTable("orders", {
 });
 
 export const orders_items = pgTable("orders_items", {
-  item_id: text("item_id").primaryKey(),
-  order_id: integer("order_id")
-    .references(() => orders.order_id, {
+  id: serial("id").primaryKey(),
+  order_id: serial("order_id")
+    .references(() => orders.orders_id, {
       onDelete: "cascade",
     })
     .notNull(),
-  product_id: integer("product_id")
+  product_id: serial("product_id")
     .references(() => products.product_id, {
       onDelete: "cascade",
     })
@@ -96,4 +95,3 @@ export const orders_items = pgTable("orders_items", {
   quantity: numeric("quantity", { precision: 10, scale: 2 }).notNull(),
   created_at: timestamp("created_at").defaultNow().notNull(),
 });
- */

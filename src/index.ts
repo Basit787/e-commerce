@@ -8,7 +8,7 @@ const app = new Hono();
 const port = Number(process.env.PORT!);
 
 //call all defined routes here
-app.route("/", routes);
+app.route("/api", routes);
 
 //better auth api
 app.on(["POST", "GET"], "/api/auth/**", (c) => {
