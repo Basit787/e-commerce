@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import { auth } from "../auth.js";
+import { auth } from "../lib/auth.js";
 
 const app = new Hono<{
   Variables: {
@@ -7,10 +7,6 @@ const app = new Hono<{
     session: typeof auth.$Infer.Session.session | null;
   };
 }>();
-
-app.on(["POST", "GET"], "/api/auth/**", (c) => {
-  return auth.handler(c.req.raw);
-});
 
 app.get("/session", async (c) => {
   const session = c.get("session");

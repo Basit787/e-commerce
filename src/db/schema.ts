@@ -1,12 +1,14 @@
 import {
   boolean,
   integer,
+  numeric,
   pgTable,
   text,
   timestamp,
   varchar,
 } from "drizzle-orm/pg-core";
 
+// tables for better auth
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
   name: varchar("name", { length: 255 }).notNull(),
@@ -59,17 +61,17 @@ export const verification = pgTable("verifications", {
   updatedAt: timestamp("updatedAt"),
 });
 
-/*
+/* //products and order tables
 export const products = pgTable("products", {
-  product_id: serial("product_id").primaryKey(),
+  product_id: text("product_id").primaryKey(),
   product_name: varchar("product_name", { length: 255 }).notNull(),
   amount: numeric("amount", { precision: 10, scale: 2 }).notNull(),
   quantity: numeric("quantity", { precision: 10, scale: 2 }).notNull(),
   created_at: timestamp("created_at").defaultNow().notNull(),
 });
 
-  export const orders = pgTable("orders", {
-  order_id: serial("order_id").primaryKey(),
+export const orders = pgTable("orders", {
+  order_id: text("order_id").primaryKey(),
   user_id: integer("user_id")
     .references(() => user.id, {
       onDelete: "cascade",
@@ -80,7 +82,7 @@ export const products = pgTable("products", {
 });
 
 export const orders_items = pgTable("orders_items", {
-  item_id: serial("item_id").primaryKey(),
+  item_id: text("item_id").primaryKey(),
   order_id: integer("order_id")
     .references(() => orders.order_id, {
       onDelete: "cascade",
