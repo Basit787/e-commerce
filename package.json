@@ -1,0 +1,31 @@
+{
+  "name": "e-commerce",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "lint": "eslint .",
+    "mig:gen": "npx drizzle-kit generate",
+    "mig:run": "npx drizzle-kit migrate",
+    "studio": "npx drizzle-kit studio"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.13.7",
+    "better-auth": "^1.0.15",
+    "dotenv": "^16.4.7",
+    "drizzle-orm": "^0.38.0",
+    "hono": "^4.6.13",
+    "postgres": "^3.4.5",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.16.0",
+    "@types/node": "^20.11.17",
+    "@types/pg": "^8.11.10",
+    "drizzle-kit": "^0.30.0",
+    "eslint": "^9.16.0",
+    "globals": "^15.13.0",
+    "pg": "^8.13.1",
+    "tsx": "^4.19.2",
+    "typescript-eslint": "^8.18.0"
+  }
+}
